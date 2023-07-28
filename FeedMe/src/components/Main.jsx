@@ -9,8 +9,8 @@ const Main = () => {
     return (
         <Routes>
             <Route path = '/' element = {<Home />} />
-            <Route path = '/dishlist/:id' element = {<DishList />} />
-            <Route path = 'dishpage/:id' element = {<DishPage />} />
+            <Route path = '/dishlist/*' element = {<DishList />} />
+            <Route path = '/dishpage/:id' element = {<DishPage />} />
         </Routes>
     )
 }
