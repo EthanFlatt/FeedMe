@@ -8,9 +8,9 @@ const Main = () => {
 
     return (
         <Routes>
-            <Route path = '/' element = {<Home />} />
-            <Route path = '/dishlist/*' element = {<DishList />} />
-            <Route path = '/dishpage/:id' element = {<DishPage />} />
+            <Route exact path = '/' element = {<Home />} />
+            <Route exact path = '/dishlist/*' element = {<DishList />} />
+            <Route exact path = '/dishpage/:id' element = {<DishPage />} />
         </Routes>
     )
 }

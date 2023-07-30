@@ -1,13 +1,25 @@
-import { Link } from 'react-router-dom'
-import globe from '../assets/globe-seeklogo.com.ai'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import Home from './Home'
+
+import earth from '../assets/earth.png'
 
 const Header = () => {
+    const [search, setSearch] = useState('')
+    const navigate = useNavigate()
+
+    const handleChange = (e) => {
+        setSearch(e.target.value)
+    }
+
+    // const showDish = (e) => {
+    //     navigate(e)
+    // }
 
     return (
         <>
         <div className="appBar">
-            <h1>Feed Me</h1>
-            
+            <h1>Feed Me</h1> 
             <div className="continentNavBar">
                 <Link to = '/dishlist/africa' id="navAfrica">Africa</Link>
                 <Link to = '/dishlist/asia' id="navAsia">Asia</Link>
@@ -17,8 +29,8 @@ const Header = () => {
                 <Link to = '/dishlsit/oceania' id="navOceania">Oceania</Link>
             </div>
             <div className="search">
-                <input type="text" value="" placeholder="Serach by continent, country, or dish" id="searchBar"/>
-                <input type="button" value="Search" id="searchButton" />
+                <input type="text" value={search} placeholder="Search by continent, country, or dish" onChange={handleChange} id="searchBar"/>
+                <Link to = {`/dishlist/${search}`}><input type="button" value="Search" id="searchButton" /></Link>
             </div>
         </div>
         </>

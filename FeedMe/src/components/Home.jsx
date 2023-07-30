@@ -1,5 +1,8 @@
-const Home = () =>  {
+import DishList from './DishList'
 
+const Home = (props) =>  {
+
+    const search = props.search
     return (
         <div className="homePage">
             <h2>Welcome to FeedMe</h2>
@@ -10,8 +13,7 @@ const Home = () =>  {
             <button id="minusButton">-</button>
             <input type="text" value="" placeholder="Type ingredient here" className="ingredientInputBar"/>
             <input type="button" value="Search Database" id="searchButton" />
-            <input type="button" value="Generate Recipe" id="searchButton" />
-
+            <input type="button" value="Generate Recipe" id="searchButton" /> 
         </div>
     )
 }
