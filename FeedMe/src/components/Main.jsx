@@ -9,7 +9,7 @@ const Main = () => {
     return (
         <Routes>
             <Route exact path = '/' element = {<Home />} />
-            <Route exact path = '/dishlist/*' element = {<DishList />} />
+            <Route exact path = '/dishlist/:name' element = {<DishList />} />
             <Route exact path = '/dishpage/:id' element = {<DishPage />} />
         </Routes>
     )

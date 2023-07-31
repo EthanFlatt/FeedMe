@@ -1,38 +1,41 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const DishList = () => {
-    const [dishes, setDishes] = useState([])
-    let navigate = useNavigate()
+const DishList = (props) => {
 
+    const [dishes, setDishes] = useState(null)
+    let navigate = useNavigate()
+    const { name } = useParams() 
+    
     useEffect(() => {
         const getDishes = async () => {
-        const response = await axios.get('http://localhost:3001/api/dishes/')
-        console.log(response)
-        setDishes(response.data.dishes)  
-        console.log(dishes)  
+            console.log(props.search)
+            const response = await axios.get(`http://localhost:3001/api/dishes?search=${name}`)
+            console.log(response)
+            setDishes(response.data.dishes)  
+            // console.log(dishes)  
         }
         getDishes()
-    }, [])
+    }, [name])
 
-    const showDish = (key) => {
-        navigate(`${key}`)
+    const showDish = (id) => {
+        navigate(`/dishpage/${id}`)
     }
 
-    return (
+    return dishes ? (
         <div className="dishListContainer">
             { 
-            dishes.map((dish, key) => (
-            <div className="dishCard" key={key} onClick={() => showDish(key)}>
+            dishes.map((dish, i) => (
+            <div className="dishCard" key={i} onClick={() => showDish(dish._id)}>
                 <img src={dish.photo} alt="" />
                 <h2>{dish.name}</h2>
-                <h3>{dish.country}</h3>
+                <h3>{dish.country.name}</h3>
             </div>
             ))
             }  
         </div>
-    ) 
+    ) : <div>Loading...</div>
 }
 
 export default DishList

@@ -1,15 +1,32 @@
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+
 const DishPage = () => {
 
-    return (
+    const [dish, setDish] = useState('')
+
+    let { id } = useParams()
+
+    useEffect(() => {
+        const getDish = async() => {
+            const response = await axios.get(`http://localhost:3001/api/dishes/${id}`)
+            setDish(response.data.dish)
+            console.log(response)
+        }
+        getDish()
+    }, [id])
+
+    return dish ? (
         <div className="dishPageContainer">
             <div className="dishInfoCard">
-                <img src="https://picsum.photos/800/500" alt="" />
-                <div className = 'dishInfoCardTitle'><h2>Paella </h2><h3>Spain</h3></div>
-                <p>Ingredients: ['chicken', 'chorizo', 'shrimp', 'rice', 'onions', 'pepper', 'chicken stock', 'saffron', 'red pepper flakes', 'lemon zest', 'oregano', 'paprika', 'salt', 'pepper']</p>
-                <p>Instuctions: 'Allow the chicken to marinate in olive oil, paprika, oregano, salt, and pepper in the fridge for a few hours (or overnight). Heat olive oil in a paella pan and stir in garlic, red pepper flakes, and rice. Add saffron, bay leaf, parsley, chicken stock, and lemon zest. Simmer rice for 20 minutes. Cook chicken, onion, bell pepper, chorizo, and shrimp until done. Then add to the rice mixture.'</p>
+                <img src={dish.photo} alt="" />
+                <div className = 'dishInfoCardTitle'><h2>{dish.name} </h2><h3>{dish.country.name}</h3></div>
+                <p>{dish.ingridients}</p>
+                <p>{dish.instructions}</p>
             </div>
         </div>
-    )
+    ) : <h3>Loading...</h3>
 }
 
 export default DishPage
