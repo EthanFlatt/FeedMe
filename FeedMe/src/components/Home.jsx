@@ -1,11 +1,16 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Home = (props) =>  {
 
     const [ingredients, setIngredients] = useState([''])
 
     const addRow = (e) => {
-        setIngredients([...ingredients, ''])
+        if (ingredients.length < 10) {
+            setIngredients([...ingredients, ''])
+        } else {
+            alert("That's too many ingredients.")
+        }
     }
 
     const removeRow = (e) => {
@@ -26,7 +31,7 @@ const Home = (props) =>  {
     return (
         <div className="homePage">
             <h2>Welcome to FeedMe</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad beatae velit a quaerat possimus praesentium libero delectus sunt fugit ab.
+            <p id='summary'>Feeling hungry? Search our database of international cuisine and find something delicious! Alternatively, go and look in your fridge, type the ingredients you see in the input bar below and hit search! You will be given a list of dishes that you can cook with the ingredients you have in your fridge.
             </p>
             <h2>Add Ingredients</h2>
             <button id="plusButton" onClick={addRow}>+</button>
@@ -36,8 +41,7 @@ const Home = (props) =>  {
                     <input type="text" value={ingredients[index]} placeholder="Type ingredient here" className="ingredientInputBar" onChange={(e) => {handleChange(e, index)}} />
                 ))
             }
-            <input type="button" value="Search Database" id="searchButton" />
-            <input type="button" value="Generate Recipe" id="searchButton" /> 
+            <Link to ={`/dishlist?ingredients=${ingredients}`}><input type="button" value="Search Database" id="searchButton" /> </Link>
         </div>
     )
 }

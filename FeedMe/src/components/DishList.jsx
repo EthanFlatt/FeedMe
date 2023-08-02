@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useSearchParams} from 'react-router-dom'
 import axios from 'axios'
 
 const DishList = (props) => {
 
     const [dishes, setDishes] = useState(null)
-    let navigate = useNavigate()
-    const { name } = useParams() 
+    const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
     
     useEffect(() => {
         const getDishes = async () => {
-            console.log(props.search)
-            const response = await axios.get(`http://localhost:3001/api/dishes?search=${name}`)
-            console.log(response)
-            setDishes(response.data.dishes)  
-            // console.log(dishes)  
+            const search = searchParams.get('search')
+            const ingredients = searchParams.get('ingredients')
+            if (search) {
+                const response = await axios.get(`http://localhost:3001/api/dishes?search=${search}`)
+                setDishes(response.data.dishes)  
+            } else if (ingredients) {
+                const response = await axios.get(`http://localhost:3001/api/dishes?ingredients=${ingredients}`)
+                setDishes(response.data.dishes) 
+            } else {
+                const response = await axios.get('http://localhost:3001/api/dishes')
+                setDishes(response.data.dishes)
+            }
         }
         getDishes()
-    }, [name])
+    }, [searchParams])
 
     const showDish = (id) => {
         navigate(`/dishpage/${id}`)
