@@ -26,7 +26,7 @@ const Header = () => {
                 <Link to = '/dishlist?search=europe' id="navEurope" onClick={handleClick}>Europe</Link>
                 <Link to = '/dishlist?search=north%20america' id="navNAmerica" onClick={handleClick}>N. America</Link>
                 <Link to = '/dishlist?search=south%20america'id="navSAmerica" onClick={handleClick}>S. America</Link>
-                <Link to = '/dishlsit?search=oceania' id="navOceania" onClick={handleClick}>Oceania</Link>
+                <Link to = '/dishlist?search=oceania' id="navOceania" onClick={handleClick}>Oceania</Link>
             </div>
             <div className="search">
                 <input type="text" value={search} placeholder="Search by continent, country, or dish" onChange={handleChange} id="searchBar"/>

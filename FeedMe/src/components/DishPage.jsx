@@ -54,14 +54,16 @@ const DishPage = () => {
         <div className="dishPageContainer">
             <div className="dishInfoCard">
                 <img src={formState.photo} alt="" />
-                <div className = 'dishInfoCardTitle'><h2>{formState.name} </h2><h3>{formState.country.name}</h3></div>
-                {
-                    formState.ingredients.map((ingredient) => (
-                        <p className="dishInfoCardIngredients">{ingredient}</p>
-                    ))
-               
-                }
-                <p>{formState.instructions}</p>
+                <div className="dishCardInfo">
+                    <div className = 'dishInfoCardTitle'><h2>{formState.name} </h2><h3>{formState.country.name}</h3></div>
+                    {
+                        formState.ingredients.map((ingredient) => (
+                            <p className="dishInfoCardIngredients">{ingredient}</p>
+                        ))
+                
+                    }
+                    <p>{formState.instructions}</p>
+                </div>
                 <div className="dishInfoCardButtons">
                     <button className='editDishButton' onClick={toggleModal}>Edit</button>
                     <button className='deleteDishButton' onClick={deleteDish}>Delete</button>
